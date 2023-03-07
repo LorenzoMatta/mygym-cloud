@@ -1,47 +1,45 @@
 package it.corso.mygym.model;
 
-
 import it.corso.mygym.model.enums.Type;
-import jakarta.validation.constraints.NotNull;
-import jdk.jfr.BooleanFlag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-@Getter
+
 @Setter
-@NoArgsConstructor
+@Getter
 @Entity
-@Table(name = "subscription")
+@NoArgsConstructor
+@Table(name="subscription")
 public class Subscription implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double price;
+    // private String type;
 
-    @NotNull
     private LocalDate startDate;
 
-    @NotNull
     private LocalDate endDate;
 
-    @NotNull
-    @BooleanFlag
-    private boolean paid;
-
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private int price;
+    @NonNull
+    private Boolean isPayed;
 
     @ManyToOne
-    @JoinColumn(name = "gym_id")
-    private Gym gym;
+    @JoinColumn(name= "gym_id")
+    Gym gym;
+
+    @ManyToOne
+    @JoinColumn(name= "user_id")
+    User user;
 
     @Column(name="type")
     private Type type;
 }
+

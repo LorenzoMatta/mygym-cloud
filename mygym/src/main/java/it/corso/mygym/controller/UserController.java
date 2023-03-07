@@ -7,30 +7,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.List;
-import java.util.Optional;
 
-import static org.springframework.http.MediaType.*;
-
-@RestController
-@RequestMapping("/{users}")
+@RequestMapping("/users")
 public interface UserController {
 
-
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
-    ResponseEntity<User> save(@Valid @RequestBody UserDto userDto);
+    ResponseEntity<User> save(@RequestBody UserDto userDto);
 
     @GetMapping("/{id}")
     ResponseEntity<User> findById(@PathVariable(value="id") Long id);
-    @GetMapping()
-    ResponseEntity <List<User>> findAll();
-
-
-    @DeleteMapping("/{id}")
-    ResponseEntity<User> deleteById(@PathVariable(value="id") Long id);
 
     @GetMapping()
-    ResponseEntity<User> update(@PathVariable(value="id") Long id, @Valid @RequestBody UserDto userDto);
+    ResponseEntity<List<User>> findAll();
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> delete(@PathVariable(value = "id") Long id);
+
+    @PutMapping("/{id}")
+    ResponseEntity<User> update(@PathVariable(value = "id") Long id, @Valid @RequestBody UserDto userDto);
+
 }

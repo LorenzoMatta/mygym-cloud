@@ -1,39 +1,46 @@
 package it.corso.mygym.model;
 
-import jdk.jfr.BooleanFlag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "user")
 @NoArgsConstructor
+@Table(name="user")
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(length = 30)
     private String name;
-    @Column(length = 30)
+
     private String surname;
-    @Column(length = 30)
+
     private String email;
 
-    private LocalDate birthDate;
+    @Nullable
+    private LocalDate dateOfBirth;
+    @Nullable
+    private Boolean certification;
 
-    @BooleanFlag
-    private boolean medicCertificate;
-    @BooleanFlag
-    private boolean activeFlag=true;
+    @NotNull
+    private Boolean activated = true;
+    @NotNull
+    private Boolean activateFlag = true;
+
 
     @OneToMany(mappedBy = "user")
-    private List<Subscription> subscriptions;
+    List<Subscription> subscriptions;
+
+
 }

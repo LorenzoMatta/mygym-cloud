@@ -7,15 +7,11 @@ public enum Type {
 
     private String type;
 
-    Type (String type){
-        this.type = type;
+    Type(String type){
+        this.type=type;
     }
-
     @Override
-    public String toString() {
+    public String toString(){
         return type;
-    }
-
-
-
+    };
 }
